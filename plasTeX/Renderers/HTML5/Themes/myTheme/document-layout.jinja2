@@ -21,12 +21,12 @@
 {% if config.html5['mathjax-dollars'] %}
   MathJax.Hub.Config({tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
 {% else %}
-  MathJax.Hub.Config({tex2jax: {inlineMath: [ ['\\(','\\)']] } });
+  MathJax.Hub.Config({tex2jax: {inlineMath: [ ['\\(','\\)']] } }); 
 {% endif %}
 </script>
 {% if config['mathjax-macros']['macros'] %}
 <script>
-  MathJax = {
+  MathJax = { 
     tex: {
       macros: { {% for key, val in config['mathjax-macros']['macros'].items() %}
         {{ key }}: {{ val }},
@@ -62,10 +62,9 @@
 </head>
 
 <body>
-{% if links.document.title or toc %}
+{% if toc %}
 <header>
 {% if toc %}{{ icon('list-numbered', id='toc-toggle')}}{% endif %}
-<h1 id="doc_title"><a href="{{ links.home.url }}">{{ links.document.title }}</a></h1>
 </header>
 {% endif %}
 
@@ -112,12 +111,12 @@
 <nav class=local_toc>
 <ul>
 {% for section in obj.tableofcontents recursive %}
-  <li>
+  <li>	
   <a href="{{ section.url }}">{{ tocEntry(section) }}</a>
   {% if section.tableofcontents %}
-        <ul>
-                 {{ loop(section.tableofcontents) }}
-        </ul>
+	<ul>
+		 {{ loop(section.tableofcontents) }}
+	</ul>
   {% endif %}
   </li>
 {% endfor %}
